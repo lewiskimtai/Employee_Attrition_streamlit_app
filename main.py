@@ -37,26 +37,28 @@ if selection== 'Employee Attrition':
     # Breakdown of distance from home by job role and attrition.
     st.header("Breakdown of distance from home by job role and attrition.")
     dist = df.groupby(['JobRole', 'Attrition'])['DistanceFromHome'].sum().reset_index()
-    st.table(dist.head())
+    st.table(dist.head(20))
     
     
     fig = px.bar(dist, 
          x='JobRole', 
          y='DistanceFromHome', 
          color='Attrition',
+         barmode="group",
         title='breakdown of distance from home by job role and attrition')
     st.plotly_chart(fig)
     
     # Average monthly income by education and attrition.
     st.header("Average monthly income by education and attrition.")
     income = df.groupby(['Education', 'Attrition'])['MonthlyIncome'].mean().reset_index()
-    st.table(income.head())
+    st.table(income.head(20))
     
     
     fig = px.bar(income, 
              x='Education', 
              y='MonthlyIncome', 
              color='Attrition',
+             barmode="group",
             title='average monthly income by education and attrition')
     st.plotly_chart(fig)
 
